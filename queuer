@@ -1,0 +1,58 @@
+#include <stdio.h>
+#include <stdlib.h>
+
+struct node
+{
+    int data;
+    struct node *next;
+};
+
+struct node *head, *tail;
+
+struct node *create(struct node *temp, int data)
+{
+    struct node *new = malloc(sizeof(struct node));
+    if (new == NULL)
+    {
+        printf("Overflow\n");
+        // return;
+    }
+    else
+    {
+        new->data = data;
+        if (head == NULL)
+        {
+            head = new;
+            tail = new;
+            head->next = NULL;
+            tail->next = NULL;
+            return head;
+        }
+        else
+        {
+            tail->next = new;
+            tail = new;
+            tail->next = NULL;
+            return head;
+        }
+    }
+}
+
+void print(struct node *temp)
+{
+    struct node *ptr = temp;
+    while (temp != NULL)
+    {
+        printf("%d ", ptr->data);
+        ptr = ptr->next;
+    }
+}
+int main()
+{
+    struct node *new = malloc(sizeof(struct node));
+    new = NULL;
+    new = create(new, 12);
+    new = create(new, 11);
+    print(new);
+    return 0;
+}
